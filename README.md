@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AdGPT Frontend - Sora-like Media Experience
+
+A React + Next.js frontend that simulates a Sora-like user experience for exploring, viewing, and generating images and videos using various aspect ratios.
+
+## Features
+
+- **Media Display Interface**: Display images and videos in 9:16 (Vertical), 1:1 (Square), and 16:9 (Wide) aspect ratios.
+- **Prompt-to-Image Generation**: Generate images using prompts with DALL·E API (currently mocked).
+- **Video Handling**: Videos autoplay on hover and loop, as in modern UIs.
+- **Explore Experience**: Infinite scroll feed with mixed grid of images/videos in multiple aspect ratios.
+- **Media Interaction**: View media in full screen, edit generation prompts, and regenerate images.
+
+## Tech Stack
+
+- React + Next.js (App Router)
+- TailwindCSS
+- Zustand for state management
+- Framer Motion for animations
+- Mock DALL·E API for image generation
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js 18+ and npm
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd adgpt-frontend
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Learn More
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- `/src/app`: Next.js App Router pages
+- `/src/components`: React components
+  - `/ui`: UI components (buttons, selectors, etc.)
+  - `/media`: Media-related components (cards, viewers, etc.)
+  - `/layout`: Layout components
+- `/src/store`: Zustand store for state management
+- `/src/types`: TypeScript types and interfaces
+- `/src/lib`: Utility functions and mock data
 
-## Deploy on Vercel
+## Usage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Generate Page**: Enter prompts to generate images in different aspect ratios.
+- **Explore Page**: Browse through a feed of images and videos.
+- **Media Viewer**: Click on any media to view it in full screen, edit prompts, and regenerate images.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Performance Optimizations
+
+- Lazy loading of images and videos
+- Prefetching for smooth aspect ratio switching
+- Optimized rendering with React hooks
+
+## License
+
+MIT
