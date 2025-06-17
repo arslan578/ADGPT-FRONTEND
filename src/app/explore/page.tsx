@@ -9,6 +9,7 @@ export default function ExplorePage() {
   const { media, addMedia } = useMediaStore();
   const [isInitialized, setIsInitialized] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
+  const [filter, setFilter] = useState<'all' | 'image' | 'video'>('all');
   
   // Handle client-side mounting
   useEffect(() => {
@@ -54,6 +55,9 @@ export default function ExplorePage() {
     }, 1000);
   };
   
+  // Filtered media based on filter state
+  const filteredMedia = filter === 'all' ? media : media.filter((item) => item.type === filter);
+  
   // Show a loading state while client-side code is initializing
   if (!isMounted) {
     return (
@@ -67,13 +71,22 @@ export default function ExplorePage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center space-x-4">
-          <button className="px-4 py-2 bg-gray-800 rounded-full text-white font-medium">
+          <button
+            className={`px-4 py-2 rounded-full font-medium ${filter === 'all' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 text-gray-400 hover:text-white'}`}
+            onClick={() => setFilter('all')}
+          >
             All
           </button>
-          <button className="px-4 py-2 hover:bg-gray-800 rounded-full text-gray-400 hover:text-white">
+          <button
+            className={`px-4 py-2 rounded-full font-medium ${filter === 'image' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 text-gray-400 hover:text-white'}`}
+            onClick={() => setFilter('image')}
+          >
             Images
           </button>
-          <button className="px-4 py-2 hover:bg-gray-800 rounded-full text-gray-400 hover:text-white">
+          <button
+            className={`px-4 py-2 rounded-full font-medium ${filter === 'video' ? 'bg-gray-800 text-white' : 'hover:bg-gray-800 text-gray-400 hover:text-white'}`}
+            onClick={() => setFilter('video')}
+          >
             Videos
           </button>
         </div>
@@ -92,7 +105,7 @@ export default function ExplorePage() {
         </div>
       </div>
       
-      <MediaGrid media={isMounted ? media : []} />
+      <MediaGrid media={isMounted ? filteredMedia : []} />
       
       {isLoading && (
         <div className="flex justify-center py-8">

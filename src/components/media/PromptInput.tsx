@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { AspectRatio } from '@/types';
 import { useMediaStore } from '@/store/useMediaStore';
 import { Button } from '@/components/ui/Button';
-import { AspectRatioSelector } from '@/components/ui/AspectRatioSelector';
 
 // Fixed image sources for different aspect ratios
 const placeholderImages = {
@@ -71,11 +70,6 @@ export const PromptInput: React.FC = () => {
   return (
     <div className="border border-gray-800 rounded-xl p-4 bg-gray-900 shadow-lg">
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="flex items-center gap-4">
-          <AspectRatioSelector />
-          <span className="text-sm text-gray-400">Current: {currentAspectRatio}</span>
-        </div>
-        
         <div className="flex items-end gap-2">
           <div className="relative flex-1">
             <textarea
