@@ -55,6 +55,42 @@ A React + Next.js frontend that simulates a Sora-like user experience for explor
 - `/src/types`: TypeScript types and interfaces
 - `/src/lib`: Utility functions and mock data
 
+## File & Folder Overview
+
+### Root
+
+- **README.md**: Project documentation and setup instructions.
+- **package.json / package-lock.json**: Project dependencies and scripts.
+- **tailwind.config.ts / postcss.config.mjs**: TailwindCSS and PostCSS configuration.
+- **tsconfig.json**: TypeScript configuration.
+- **next.config.mjs / next-env.d.ts**: Next.js configuration and type definitions.
+- **public/**: Static assets (images, favicon, etc.).
+
+### `/src/app`
+- **page.tsx**: Main entry page for the app.
+- **layout.tsx**: Root layout for all pages.
+- **globals.css**: Global styles.
+- **explore/page.tsx**: The Explore page, with infinite scroll and media filtering.
+- **generate/**: (Reserved for future media generation pages.)
+
+### `/src/components`
+- **layout/MainLayout.tsx**: Main layout component with sidebar navigation and modal support.
+- **media/PromptInput.tsx**: Prompt input bar for generating images.
+- **media/MediaGrid.tsx**: Masonry grid for displaying media.
+- **media/MediaCard.tsx**: Card component for individual images/videos.
+- **media/MediaViewer.tsx**: Fullscreen modal for viewing and editing media.
+- **ui/AspectRatioSelector.tsx**: Aspect ratio filter button group.
+- **ui/Button.tsx**: Reusable button component.
+
+### `/src/store`
+- **useMediaStore.ts**: Zustand store for global media state, aspect ratio, and filtering.
+
+### `/src/types`
+- **index.ts**: TypeScript types for media, aspect ratios, and store.
+
+### `/src/lib`
+- **mockData.ts**: Mock data for images and videos, and helper functions for populating the store.
+
 ## Usage
 
 - **Generate Page**: Enter prompts to generate images in different aspect ratios.

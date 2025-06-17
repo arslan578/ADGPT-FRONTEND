@@ -39,15 +39,6 @@ export default function GeneratePage() {
   
   return (
     <div className="space-y-8">
-      <div className="flex flex-col gap-6">
-        <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-white">Generate Media</h1>
-          <AspectRatioSelector />
-        </div>
-        
-        <PromptInput />
-      </div>
-      
       <div className="mt-12">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-semibold text-white">Your Generated Media</h2>
