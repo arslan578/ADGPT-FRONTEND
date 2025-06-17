@@ -21,25 +21,42 @@ export const MediaGrid: React.FC<MediaGridProps> = ({ media, onMediaClick, class
 
   // Create columns for masonry layout
   const createMasonryLayout = () => {
-    // Group items by aspect ratio for better arrangement
-    const wideItems = media.filter(item => item.aspectRatio === AspectRatio.WIDE);
-    const squareItems = media.filter(item => item.aspectRatio === AspectRatio.SQUARE);
-    const verticalItems = media.filter(item => item.aspectRatio === AspectRatio.VERTICAL);
+    // Distribute items evenly across columns
+    const columns: ReactNode[][] = [[], [], []];
+    const columnHeights = [0, 0, 0];
     
-    // Arrange items in a way that creates a balanced layout
-    const leftColumn: ReactNode[] = [];
-    const centerColumn: ReactNode[] = [];
-    const rightColumn: ReactNode[] = [];
+    // Sort media by aspect ratio to ensure better distribution
+    // This helps create a more balanced layout
+    const sortedMedia = [...media].sort((a, b) => {
+      // Put vertical items first, then wide, then square
+      const aspectRatioOrder = {
+        [AspectRatio.VERTICAL]: 0,
+        [AspectRatio.WIDE]: 1,
+        [AspectRatio.SQUARE]: 2
+      };
+      return aspectRatioOrder[a.aspectRatio] - aspectRatioOrder[b.aspectRatio];
+    });
     
-    // Distribute items evenly across columns while maintaining visual balance
-    // This algorithm tries to create a balanced distribution based on aspect ratios
-    let columnHeights = [0, 0, 0]; // Track approximate height of each column
+    // Calculate approximate height for each aspect ratio
+    const getHeightFactor = (aspectRatio: AspectRatio) => {
+      switch (aspectRatio) {
+        case AspectRatio.VERTICAL:
+          return 1.8;
+        case AspectRatio.WIDE:
+          return 0.6;
+        case AspectRatio.SQUARE:
+          return 1;
+        default:
+          return 1;
+      }
+    };
     
-    // Helper to add item to the shortest column
-    const addToShortestColumn = (item: Media, heightFactor: number) => {
+    // Add each item to the column with the smallest height
+    sortedMedia.forEach((item) => {
+      const heightFactor = getHeightFactor(item.aspectRatio);
       const shortestColumnIndex = columnHeights.indexOf(Math.min(...columnHeights));
       
-      const component = (
+      columns[shortestColumnIndex].push(
         <MediaCard
           key={item.id}
           media={item}
@@ -48,38 +65,16 @@ export const MediaGrid: React.FC<MediaGridProps> = ({ media, onMediaClick, class
         />
       );
       
-      if (shortestColumnIndex === 0) {
-        leftColumn.push(component);
-      } else if (shortestColumnIndex === 1) {
-        centerColumn.push(component);
-      } else {
-        rightColumn.push(component);
-      }
-      
-      // Update column height
       columnHeights[shortestColumnIndex] += heightFactor;
-    };
-    
-    // Add wide items (they have more visual weight)
-    wideItems.forEach(item => {
-      addToShortestColumn(item, 1.5);
-    });
-    
-    // Add vertical items (they're taller)
-    verticalItems.forEach(item => {
-      addToShortestColumn(item, 2);
-    });
-    
-    // Add square items
-    squareItems.forEach(item => {
-      addToShortestColumn(item, 1);
     });
     
     return (
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-        <div className="flex flex-col gap-5">{leftColumn}</div>
-        <div className="flex flex-col gap-5">{centerColumn}</div>
-        <div className="flex flex-col gap-5">{rightColumn}</div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {columns.map((column, index) => (
+          <div key={index} className="flex flex-col">
+            {column}
+          </div>
+        ))}
       </div>
     );
   };

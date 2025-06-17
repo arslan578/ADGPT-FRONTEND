@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react';
 import { MediaGrid } from '@/components/media/MediaGrid';
 import { useMediaStore } from '@/store/useMediaStore';
 import { initializeStoreWithMockData } from '@/lib/mockData';
-import { AspectRatio } from '@/types';
 
 export default function ExplorePage() {
   const { media, addMedia } = useMediaStore();
@@ -65,20 +64,30 @@ export default function ExplorePage() {
   }
   
   return (
-    <div className="space-y-8">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-white mb-2">Explore Media</h1>
-          <p className="text-gray-400">
-            Discover and explore a variety of images and videos in different aspect ratios
-          </p>
+    <div>
+      <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center space-x-4">
+          <button className="px-4 py-2 bg-gray-800 rounded-full text-white font-medium">
+            All
+          </button>
+          <button className="px-4 py-2 hover:bg-gray-800 rounded-full text-gray-400 hover:text-white">
+            Images
+          </button>
+          <button className="px-4 py-2 hover:bg-gray-800 rounded-full text-gray-400 hover:text-white">
+            Videos
+          </button>
         </div>
         
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-gray-400">Showing all formats</span>
-          <div className="h-6 w-px bg-gray-700"></div>
-          <button className="text-sm text-blue-400 hover:text-blue-300 transition-colors">
-            Filter
+        <div className="flex items-center space-x-2">
+          <button className="p-2 rounded-full hover:bg-gray-800 text-gray-400 hover:text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
+            </svg>
+          </button>
+          <button className="p-2 rounded-full bg-gray-800 text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+            </svg>
           </button>
         </div>
       </div>
